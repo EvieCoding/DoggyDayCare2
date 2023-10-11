@@ -9,21 +9,65 @@ namespace DoggyDayCare2
 {
     public class Dog
     {
-        private string _dogName,
-            _ownerName,
+        private string _ownerName,
+            _dogName,
             _dogBreed,
             _dogColor,
             _size,
             _lifeStage;
-        private static float _age,
+        private float _age,
             _weight;
-        private static double _total;
+        private double _total;
         private bool _food;
-        private static int _instanceCount;
-
-        public Dog()
+        public string ownerName 
         {
-            _instanceCount++;
+            get {  return _ownerName; }
+            set {  _ownerName = value; } 
+        }
+        public string dogName 
+        {
+            get { return _dogName; }
+            set { _dogName = value; }
+        }
+        public string dogBreed 
+        { 
+            get { return _dogBreed; }
+            set { _dogBreed = value; }
+        }
+        public string dogColor 
+        {
+            get { return _dogColor; }
+            set { _dogColor = value; }
+        }
+        public string size 
+        { 
+            get { return _size; } 
+            set { _size = value; }
+        }
+        public string lifeStage 
+        {
+            get { return _lifeStage; } 
+            set { _lifeStage = lifeStage; }
+        }
+        public float age 
+        { 
+            get { return _age; }
+            set { _age = value; }
+        }
+        public float weight 
+        { 
+            get { return _weight; }
+            set { _weight = value; } 
+        }
+        public double total 
+        { 
+            get { return _total; }
+            set { _total = total; }
+        }
+        public bool food 
+        { 
+            get { return _food; } 
+            set { _food = value; }
         }
 
         public Dog(string pupName, string clientName, float pupAge, string pupBreed,
@@ -37,99 +81,9 @@ namespace DoggyDayCare2
             _food = pupFood;
             _dogColor = pupColor;
             _total = 0.0;
-            _age = 0;
+            _age = pupAge;
             _lifeStage = "";
             _size = "";
-        }
-
-        public int getInstanceCount()
-        {
-            return _instanceCount;
-        }
-
-        public string getDogName()
-        {
-            return _dogName;
-        }
-
-        public string getOwnerName()
-        {
-            return _ownerName;
-        }
-
-        public string getBreed()
-        {
-            return _dogBreed;
-        }
-
-        public string getColor()
-        {
-            return _dogColor;
-        }
-
-        public string getSize()
-        {
-            return _size;
-        }
-
-        public string getLifeStage()
-        {
-            return _lifeStage;
-        }
-
-        public float getAge()
-        {
-            return _age;
-        }
-
-        public float getWeight()
-        {
-            return _weight;
-        }
-
-        public double getTotal()
-        {
-            return _total;
-        }
-
-        public bool getFood()
-        {
-            return _food;
-        }
-
-        public void setDogName(string pupName)
-        {
-            _dogName = pupName;
-        }
-
-        public void setOwnerName(string clientName)
-        {
-            _ownerName = clientName;
-        }
-
-        public void setBreed(string pupBreed)
-        {
-            _dogBreed = pupBreed;
-        }
-
-        public void setColor(string pupColor)
-        {
-            _dogColor = pupColor;
-        }
-
-        public void setAge(float pupAge)
-        {
-            _age = pupAge;
-        }
-
-        public void setWeight(float pupWeight)
-        {
-            _weight = pupWeight;
-        }
-
-        public void setFood(bool pupFood)
-        {
-            _food = pupFood;
         }
 
         public string determineLifeStage()
@@ -175,26 +129,21 @@ namespace DoggyDayCare2
             return _size;
         }
 
-        public static void checkOutDog()
+        public double priceForDay()
         {
-            _instanceCount--;
-        }
-
-        public static double priceForDay(string size, float pupWeight)
-        {
-            if (size.Equals("small") || size.Equals("medium"))
+            if (_size.Equals("small") || _size.Equals("medium"))
             {
                 _total = 45;
                 return _total;
             }
             else
             {
-                _total = 45 + (0.1 * pupWeight);
+                _total = 45 + (0.1 * _weight);
                 return _total;
             }
         }
 
-        public static double priceForDay(bool food)
+        public double priceForDay(bool food)
         {
             if (food)
             {
