@@ -9,41 +9,36 @@ using System.Threading.Tasks;
 
 namespace DoggyDayCare2
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            int index;
             float pupAge,
                 pupWeight;
             string pupName,
                 clientName,
                 pupBreed,
-                pupColor,
-                foodAns;
+                pupColor;
             bool pupFood = false;
-            const int NUM_DOGS = 30;
+            const int MAX_DOGS = 30;
 
             Console.WriteLine("Select one of the following:\n" +
                 "1 to Check in Dog\n" +
                 "2 to Check out Dog\n" +
                 "3 to Exit\n");
 
-            Dog[] dogs = new Dog[NUM_DOGS];
-
-            Dog dog;
+            List<Dog> dogs = new List<Dog>();
 
             Console.WriteLine();
 
             Console.Write("Enter an option: ");
-            var input = Console.ReadLine();
+            var input = Console.ReadLine().Trim();
 
             while (input != "3")
             {
                 if (input == "1")
                 {
-                    Dog dogInstance = new Dog();
-                    if(dogInstance.getInstanceCount() <= NUM_DOGS)
+                    if (dogs.Count < MAX_DOGS)
                     {
                         Console.Write("Client's name: ");
                         clientName = Console.ReadLine();
@@ -58,31 +53,37 @@ namespace DoggyDayCare2
                         pupColor = Console.ReadLine();
 
                         Console.Write("Dog's age(in years): ");
-                        pupAge = float.Parse(Console.ReadLine());
+                        input = Console.ReadLine().Trim();
 
-                        while (pupAge <= 0.0)
+                        while(!float.TryParse(input, out pupAge) || pupAge <= 0)
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("Age must be greater than 0.");
-                            Console.Write("Enter another age: ");
-                            pupAge = float.Parse(Console.ReadLine());
+                            Console.WriteLine("Age must be a number and greater than 0.");
+                            Console.Write("Enter the age again: ");
+                            input = Console.ReadLine().Trim();
                         }
 
                         Console.Write("Dog's weight(in pounds): ");
-                        pupWeight = float.Parse(Console.ReadLine());
+                        input = Console.ReadLine().Trim();
 
-                        while (pupWeight <= 0.0)
+                        while(!float.TryParse(input,out pupWeight) || pupWeight <= 0)
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("Weight must be greater than 0.");
-                            Console.Write("Enter another weight: ");
-                            pupWeight= float.Parse(Console.ReadLine());
+                            Console.WriteLine("Weight must be a number and greater than 0.");
+                            Console.Write("Enter the weight again: ");
+                            input = Console.ReadLine().Trim();
                         }
 
-                        Console.Write("Did client bring out dog food?(y/n): ");
-                        foodAns = Console.ReadLine();
+                        Console.Write("Did client bring dog food?(y/n): ");
+                        input = Console.ReadLine().ToUpper().Trim();
 
-                        if (foodAns.Equals("y") || foodAns.Equals("Y"))
+                        while (!input.Equals("Y") && !input.Equals("N") || input.Equals(""))
+                        {
+                            Console.WriteLine("Enter y for yes or n for no.");
+                            Console.Write("Did client bring dog food?(y/n): ");
+
+                            input = Console.ReadLine().ToUpper().Trim();
+                        }
+
+                        if (input.Equals("Y"))
                         {
                             pupFood = true;
                         }
@@ -93,23 +94,13 @@ namespace DoggyDayCare2
 
                         Console.WriteLine();
 
-                        dog = new Dog(pupName, clientName, pupAge, pupBreed,
+                        var dog = new Dog(pupName, clientName, pupAge, pupBreed,
                             pupWeight, pupFood, pupColor);
+                        dogs.Add(dog);
+                        dog.determineSize();
+                        dog.priceForDay();
 
-                        Dog.priceForDay(dog.determineSize(), pupWeight);
-
-                        Console.WriteLine(String.Format("Total: {0:C}", Dog.priceForDay(pupFood)));
-
-                        index = dogInstance.getInstanceCount() - 1;
-
-                        dogs[index] = dog;
-                        dogs[index].setDogName(pupName);
-                        dogs[index].setOwnerName(clientName);
-                        dogs[index].setBreed(pupBreed);
-                        dogs[index].setColor(pupColor);
-                        dogs[index].setAge(pupAge);
-                        dogs[index].setWeight(pupWeight);
-                        dogs[index].setFood(pupFood);
+                        Console.WriteLine(String.Format("Total: {0:C}", dog.priceForDay(pupFood)));
                     }
                     else
                     {
@@ -120,30 +111,18 @@ namespace DoggyDayCare2
 
                 if (input == "2")
                 {
-                    int count = 0;
                     Console.Write("Enter the client's name: ");
                     clientName = Console.ReadLine();
 
                     Console.WriteLine();
 
-                    for (int Index = 0; Index <= dogs.Length - 1; Index++)
+                    for (int i = 0; i < dogs.Count; i++)
                     {
-                        if (dogs[Index] != null && dogs[Index].getOwnerName() == clientName)
+                        if (dogs[i].ownerName == clientName)
                         {
-                            Console.WriteLine(dogs[Index].getDogName() + " is checked out.");
-                            dogs[Index] = null;
-                            Dog.checkOutDog();
-                            count++;
+                            Console.WriteLine("{0} was checked out.", dogs[i].dogName);
+                            dogs.RemoveAt(i);
                         }
-                        else
-                        {
-                            dogs[Index - count] = dogs[Index];
-                        }
-                    }
-
-                    for (int i = 1; i <= count; i++)
-                    {
-                        dogs[dogs.Length - i] = null;
                     }
                 }
 
@@ -157,19 +136,20 @@ namespace DoggyDayCare2
                 DateTime date = DateTime.Now;
                 FileStream file = new FileStream(date.ToString("yyyy-MM-dd") + "LatePickups" + ".txt", FileMode.Create);
                 StreamWriter writer = new StreamWriter(file);
-                
-                for (int INDEX = 0; INDEX < dogs.Length - 1; INDEX++)
-                {
-                    if (dogs[INDEX] != null)
-                    {
-                        writer.WriteLine("Client name: " + dogs[INDEX].getOwnerName());
-                        writer.WriteLine("Dog name: " + dogs[INDEX].getDogName());
-                        writer.WriteLine("Dog Breed: " + dogs[INDEX].getBreed());
-                        writer.WriteLine("Dog Color: " + dogs[INDEX].getColor());
-                        writer.WriteLine("Dog Age: " + dogs[INDEX].getAge());
-                        writer.WriteLine("Dog Weight: " + dogs[INDEX].getWeight());
 
-                        if (dogs[INDEX].getFood() == true)
+                foreach (Dog left in dogs)
+                {
+                    if (left != null)
+                    {
+                        writer.WriteLine(
+                            "Client name: {0}\n" +
+                            "Dog name: {1}\n" +
+                            "Dog Breed: {2}\n" +
+                            "Dog Color: {3}\n" +
+                            "Dog age: {4}\n" +
+                            "Dog Weight: {5}", left.ownerName, left.dogName, left.dogBreed, left.dogColor, left.age, left.weight);
+
+                        if (left.food == true)
                         {
                             writer.WriteLine("Food: Yes");
                         }
@@ -177,12 +157,13 @@ namespace DoggyDayCare2
                         {
                             writer.WriteLine("Food: No");
                         }
-                        writer.WriteLine("Lifestage: " + dogs[INDEX].determineLifeStage());
-                        writer.WriteLine("Size: " + dogs[INDEX].getSize());
-                        writer.WriteLine(String.Format("Total: {0:C}",  dogs[INDEX].getTotal()));
-                        writer.WriteLine();
+
+                        writer.WriteLine(
+                            "Lifestage: {0}\n" +
+                            "Size: {1}\n" +
+                            "Total: {2:C}\n", left.determineLifeStage(), left.determineSize(), left.total);
                     }
-                } 
+                }
 
                 writer.Close();
                 Console.WriteLine();
