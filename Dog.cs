@@ -81,7 +81,6 @@ namespace DoggyDayCare2
             _food = pupFood;
             _dogColor = pupColor;
             _total = 0.0;
-            _age = pupAge;
             _lifeStage = "";
             _size = "";
         }
