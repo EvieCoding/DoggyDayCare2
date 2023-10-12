@@ -160,7 +160,7 @@ namespace DoggyDayCare2
                         writer.WriteLine(
                             "Lifestage: {0}\n" +
                             "Size: {1}\n" +
-                            "Total: {2:C}\n", left.determineLifeStage(), left.determineSize(), left.total);
+                            "Total: {2:C}\n", left.determineLifeStage(), left.size, left.total);
                     }
                 }
 
