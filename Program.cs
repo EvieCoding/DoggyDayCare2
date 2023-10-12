@@ -98,7 +98,6 @@ namespace DoggyDayCare2
                             pupWeight, pupFood, pupColor);
                         dogs.Add(dog);
                         dog.determineSize();
-                        dog.priceForDay();
 
                         Console.WriteLine(String.Format("Total: {0:C}", dog.priceForDay(pupFood)));
                     }
