@@ -22,52 +22,42 @@ namespace DoggyDayCare2
         public string ownerName 
         {
             get {  return _ownerName; }
-            set {  _ownerName = value; } 
         }
         public string dogName 
         {
             get { return _dogName; }
-            set { _dogName = value; }
         }
         public string dogBreed 
         { 
             get { return _dogBreed; }
-            set { _dogBreed = value; }
         }
         public string dogColor 
         {
             get { return _dogColor; }
-            set { _dogColor = value; }
         }
         public string size 
         { 
             get { return _size; } 
-            set { _size = value; }
         }
         public string lifeStage 
         {
             get { return _lifeStage; } 
-            set { _lifeStage = lifeStage; }
         }
         public float age 
         { 
             get { return _age; }
-            set { _age = value; }
         }
         public float weight 
         { 
             get { return _weight; }
-            set { _weight = value; } 
         }
         public double total 
         { 
             get { return _total; }
-            set { _total = total; }
         }
         public bool food 
         { 
             get { return _food; } 
-            set { _food = value; }
         }
 
         public Dog(string pupName, string clientName, float pupAge, string pupBreed,
