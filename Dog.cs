@@ -128,25 +128,12 @@ namespace DoggyDayCare2
             {
                 _total = 45 + (0.1 * _weight);
             }
-                return _total;
-        }
 
-        public double priceForDay(bool food)
-        {
-            if (_size.Equals("small") || _size.Equals("medium"))
-            {
-                _total = 45;
-            }
-            else
-            {
-                _total = 45 + (0.1 * _weight);
-            }
-
-            if (food)
+            if (_food == false)
             {
                 _total += 5;
             }
-            return _total;
+                return _total;
         }
     }
 }
