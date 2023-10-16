@@ -19,7 +19,7 @@ namespace DoggyDayCare2
                 clientName,
                 pupBreed,
                 pupColor;
-            bool pupFood = false;
+            bool pupFood;
             const int MAX_DOGS = 30;
 
             Console.WriteLine("Select one of the following:\n" +
@@ -99,7 +99,7 @@ namespace DoggyDayCare2
                         dogs.Add(dog);
                         dog.determineSize();
 
-                        Console.WriteLine(String.Format("Total: {0:C}", dog.priceForDay(pupFood)));
+                        Console.WriteLine(String.Format("Total: {0:C}", dog.priceForDay()));
                     }
                     else
                     {
