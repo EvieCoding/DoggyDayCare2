@@ -41,16 +41,16 @@ namespace DoggyDayCare2
                     if (dogs.Count < MAX_DOGS)
                     {
                         Console.Write("Client's name: ");
-                        clientName = Console.ReadLine();
+                        clientName = Console.ReadLine().Trim();
 
                         Console.Write("Dog's name: ");
-                        pupName = Console.ReadLine();
+                        pupName = Console.ReadLine().Trim();
 
                         Console.Write("Dog's breed: ");
-                        pupBreed = Console.ReadLine();
+                        pupBreed = Console.ReadLine().Trim();
 
                         Console.Write("Dog's color: ");
-                        pupColor = Console.ReadLine();
+                        pupColor = Console.ReadLine().Trim();
 
                         Console.Write("Dog's age(in years): ");
                         input = Console.ReadLine().Trim();
@@ -111,7 +111,7 @@ namespace DoggyDayCare2
                 if (input == "2")
                 {
                     Console.Write("Enter the client's name: ");
-                    clientName = Console.ReadLine();
+                    clientName = Console.ReadLine().Trim();
 
                     Console.WriteLine();
 
@@ -127,7 +127,7 @@ namespace DoggyDayCare2
 
                 Console.WriteLine();
                 Console.Write("Enter another selection: ");
-                input = Console.ReadLine();
+                input = Console.ReadLine().Trim();
             }
 
             if (input == "3")
