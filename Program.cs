@@ -130,44 +130,42 @@ namespace DoggyDayCare2
                 input = Console.ReadLine().Trim();
             }
 
-            if (input == "3")
+            DateTime date = DateTime.Now;
+            FileStream file = new FileStream(date.ToString("yyyy-MM-dd") + "LatePickups" + ".txt", FileMode.Create);
+            StreamWriter writer = new StreamWriter(file);
+
+            foreach (Dog left in dogs)
             {
-                DateTime date = DateTime.Now;
-                FileStream file = new FileStream(date.ToString("yyyy-MM-dd") + "LatePickups" + ".txt", FileMode.Create);
-                StreamWriter writer = new StreamWriter(file);
-
-                foreach (Dog left in dogs)
+                if (left != null)
                 {
-                    if (left != null)
+                    writer.WriteLine(
+                        "Client name: {0}\n" +
+                        "Dog name: {1}\n" +
+                        "Dog Breed: {2}\n" +
+                        "Dog Color: {3}\n" +
+                        "Dog age: {4}\n" +
+                        "Dog Weight: {5}", left.ownerName, left.dogName, left.dogBreed, left.dogColor, left.age, left.weight);
+
+                    if (left.food == true)
                     {
-                        writer.WriteLine(
-                            "Client name: {0}\n" +
-                            "Dog name: {1}\n" +
-                            "Dog Breed: {2}\n" +
-                            "Dog Color: {3}\n" +
-                            "Dog age: {4}\n" +
-                            "Dog Weight: {5}", left.ownerName, left.dogName, left.dogBreed, left.dogColor, left.age, left.weight);
-
-                        if (left.food == true)
-                        {
-                            writer.WriteLine("Food: Yes");
-                        }
-                        else
-                        {
-                            writer.WriteLine("Food: No");
-                        }
-
-                        writer.WriteLine(
-                            "Lifestage: {0}\n" +
-                            "Size: {1}\n" +
-                            "Total: {2:C}\n", left.determineLifeStage(), left.size, left.total);
+                        writer.WriteLine("Food: Yes");
                     }
-                }
+                    else
+                    {
+                        writer.WriteLine("Food: No");
+                    }
 
-                writer.Close();
-                Console.WriteLine();
-                Console.WriteLine("The doggy daycare is closed.");
+                    writer.WriteLine(
+                        "Lifestage: {0}\n" +
+                        "Size: {1}\n" +
+                        "Total: {2:C}\n", left.determineLifeStage(), left.size, left.total);
+                }
             }
+
+            writer.Close();
+            Console.WriteLine();
+            Console.WriteLine("The doggy daycare is closed.");
+            
         }
     }
 }
