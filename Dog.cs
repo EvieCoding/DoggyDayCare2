@@ -20,46 +20,49 @@ namespace DoggyDayCare2
         private double _total;
         private bool _food;
         private float value;
-        public string ownerName 
+        
+        public string OwnerName 
         {
             get {  return _ownerName; }
         }
-        public string dogName 
+        public string DogName 
         {
             get { return _dogName; }
         }
-        public string dogBreed 
+        public string DogBreed 
         { 
             get { return _dogBreed; }
         }
-        public string dogColor 
+        public string DogColor 
         {
             get { return _dogColor; }
         }
-        public string size 
+        public string Size 
         { 
             get { return _size; } 
         }
-        public string lifeStage 
+        public string LifeStage 
         {
             get { return _lifeStage; } 
         }
-        public float age 
+        public float Age 
         { 
             get { return _age; }
         }
-        public float weight 
+        public float Weight 
         { 
             get { return _weight; }
         }
-        public double total 
+        public double Total 
         { 
             get { return _total; }
         }
-        public bool food 
+        public bool Food 
         { 
             get { return _food; } 
         }
+        
+        public Dog() { }
 
         public Dog(string pupName, string clientName, float pupAge, string pupBreed,
             float pupWeight, bool pupFood, string pupColor)
