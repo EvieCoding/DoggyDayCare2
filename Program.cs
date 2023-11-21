@@ -52,17 +52,17 @@ namespace DoggyDayCare2
                             input = Console.ReadLine().Trim();
 
                             var inputDog = new Dog();
-                            pupAge = inputDog.invalidInput(input);
+                            pupAge = inputDog.InvalidInput(input);
 
                             Console.Write("Dog's weight(in pounds): ");
                             input = Console.ReadLine().Trim();
 
-                            pupWeight = inputDog.invalidInput(input);
+                            pupWeight = inputDog.InvalidInput(input);
 
                             Console.Write("Did client bring dog food?(y/n): ");
                             input = Console.ReadLine().ToUpper().Trim();
 
-                            input = inputDog.yesNoInputValidation(input);
+                            input = inputDog.YesNoInputValidation(input);
 
                             if (input.Equals("Y"))
                             {
@@ -109,7 +109,7 @@ namespace DoggyDayCare2
                 input = Console.ReadLine().Trim();
             }
 
-            Dog.writeToAFile(dogs);
+            Dog.WriteToAFile(dogs);
             }
         }
     }
