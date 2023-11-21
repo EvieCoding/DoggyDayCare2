@@ -79,7 +79,7 @@ namespace DoggyDayCare2
             _size = "";
         }
 
-        public string determineLifeStage()
+        public string DetermineLifeStage()
         {
             if (_age < 1)
             {
@@ -100,7 +100,7 @@ namespace DoggyDayCare2
             return _lifeStage;
         }
 
-        public string determineSize()
+        public string DetermineSize()
         {
             if (_weight > 0 && _weight <= 10)
             {
@@ -122,7 +122,7 @@ namespace DoggyDayCare2
             return _size;
         }
 
-        public double priceForDay()
+        public double PriceForDay()
         {
             if (_size.Equals("small") || _size.Equals("medium"))
             {
@@ -140,7 +140,7 @@ namespace DoggyDayCare2
                 return _total;
         }
 
-        public float invalidInput(string input)
+        public float InvalidInput(string input)
         {
             while (!float.TryParse(input, out value) || value <= 0)
             {
@@ -152,7 +152,7 @@ namespace DoggyDayCare2
             return float.Parse(input);
         }
 
-        public string yesNoInputValidation(string input)
+        public string YesNoInputValidation(string input)
         {
             while (!input.Equals("Y") && !input.Equals("N") || input.Equals(""))
             {
@@ -165,7 +165,7 @@ namespace DoggyDayCare2
             return input;
         }
 
-        public static void writeToAFile(List<Dog> dogs)
+        public static void WriteToAFile(List<Dog> dogs)
         {
             DateTime date = DateTime.Now;
             FileStream file = new FileStream(date.ToString("yyyy-MM-dd") + "LatePickups" + ".txt", FileMode.Create);
