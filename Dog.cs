@@ -19,6 +19,7 @@ namespace DoggyDayCare2
             _weight;
         private double _total;
         private bool _food;
+        private float value;
         public string ownerName 
         {
             get {  return _ownerName; }
