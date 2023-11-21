@@ -164,44 +164,5 @@ namespace DoggyDayCare2
 
             return input;
         }
-
-        public static void WriteToAFile(List<Dog> dogs)
-        {
-            DateTime date = DateTime.Now;
-            FileStream file = new FileStream(date.ToString("yyyy-MM-dd") + "LatePickups" + ".txt", FileMode.Create);
-            StreamWriter writer = new StreamWriter(file);
-
-            foreach (Dog left in dogs)
-            {
-                if (left != null)
-                {
-                    writer.WriteLine(
-                        "Client name: {0}\n" +
-                        "Dog name: {1}\n" +
-                        "Dog Breed: {2}\n" +
-                        "Dog Color: {3}\n" +
-                        "Dog age: {4}\n" +
-                        "Dog Weight: {5}", left.OwnerName, left.DogName, left.DogBreed, left.DogColor, left.Age, left.Weight);
-
-                    if (left.Food)
-                    {
-                        writer.WriteLine("Food: Yes");
-                    }
-                    else
-                    {
-                        writer.WriteLine("Food: No");
-                    }
-
-                    writer.WriteLine(
-                        "Lifestage: {0}\n" +
-                        "Size: {1}\n" +
-                        "Total: {2:C}\n", left.DetermineLifeStage(), left.Size, left.Total);
-                }
-            }
-
-            writer.Close();
-            Console.WriteLine();
-            Console.WriteLine("The doggy daycare is closed.");
-        }
     }
 }
