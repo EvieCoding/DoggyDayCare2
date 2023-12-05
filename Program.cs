@@ -57,12 +57,12 @@ namespace DoggyDayCare2
                         input = Console.ReadLine().Trim();
 
                         var inputDog = new Dog();
-                        pupAge = inputDog.InvalidInput(input);
+                        pupAge = inputDog.WeightAndAgeValidation(input);
 
                         Console.Write("Dog's weight(in pounds): ");
                         input = Console.ReadLine().Trim();
 
-                        pupWeight = inputDog.InvalidInput(input);
+                        pupWeight = inputDog.WeightAndAgeValidation(input);
 
                         Console.Write("Did client bring dog food?(y/n): ");
                         input = Console.ReadLine().ToUpper().Trim();
