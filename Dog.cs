@@ -140,7 +140,7 @@ namespace DoggyDayCare2
                 return _total;
         }
 
-        public float InvalidInput(string input)
+        public float WeightAndAgeValidation(string input)
         {
             while (!float.TryParse(input, out value) || value <= 0)
             {
